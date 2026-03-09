@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import Button from '@/components/ui/Button';
@@ -35,7 +36,7 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <h1 className="text-3xl mb-2">Teljarc</h1>
+          <Image src="/teljarc-logo-header.png" alt="Teljarc" width={180} height={36} className="mx-auto mb-2" priority />
           <p className="text-text-secondary text-sm">Founders Portal</p>
         </div>
         <form onSubmit={handleLogin} className="space-y-4">

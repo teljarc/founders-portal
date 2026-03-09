@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { LogOut, Lightbulb, FolderKanban, TrendingUp, FileText } from 'lucide-react';
@@ -45,8 +46,8 @@ export default function DashboardShell({ userId, userName, children }: Dashboard
     <div className="min-h-screen">
       <header className="border-b border-border bg-bg-secondary/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
-          <Link href="/dashboard/ideas" className="text-lg font-serif font-bold tracking-tight">
-            Teljarc
+          <Link href="/dashboard/ideas">
+            <Image src="/teljarc-logo-header.png" alt="Teljarc" width={180} height={36} priority />
           </Link>
           <div className="flex items-center gap-3">
             <NotificationBell userId={userId} />
