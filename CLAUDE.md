@@ -25,7 +25,7 @@ Uppdateras vid större arkitekturförändringar eller nya features.
 | Auth + DB | Supabase (PostgreSQL + RLS) |
 | Realtime | Supabase Realtime (postgres_changes) |
 | Push | Web Push API + VAPID (web-push npm) |
-| PWA | manifest.json + Service Worker (/public/sw.js) |
+| PWA | manifest.json + Service Worker (/public/sw.js) + PNG-ikoner |
 | Deploy | Vercel (auto från GitHub main) |
 
 ---
@@ -54,7 +54,7 @@ Gäster skapas via `/vote/login` (self-registration med role: guest).
 ### Auth & roller
 - Roller sätts i `raw_user_meta_data.role` (`founder` | `guest`)
 - `proxy.ts` (f.d. middleware.ts) hanterar redirect-logik
-- Founders default till `founder` om role saknas (se middleware)
+- Founders default till `founder` om role saknas (se proxy.ts)
 
 ### Notifikationer
 - `lib/push/notify.ts` — server action
@@ -118,6 +118,15 @@ VAPID_EMAIL
 - Färgkodade användarbadges
 - Gästportalen har ljust tema (slate-färger, rounded corners)
 - Mobile-first: `sm:` breakpoint för de flesta responsiva justeringar
+
+### Logotyp & ikoner
+| Fil | Användning |
+|---|---|
+| `public/teljarc-logo-header.png` | Header (DashboardShell) + login-sida, 180×36px |
+| `public/teljarc-icon-192.png` | PWA-ikon 192×192px, push-notis-ikon |
+| `public/teljarc-icon-512.png` | PWA-ikon 512×512px (maskable) |
+
+> OBS: PNG-filer kopierade från Windows via WSL får `Zone.Identifier`-sidofiler — dessa ignoreras av `.gitignore`. Addera alltid PNG-filer explicit med `git add <fil>` (inte `git add .`) för att undvika att råka committa Zone.Identifier-filerna.
 
 ---
 
