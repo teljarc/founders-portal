@@ -64,7 +64,7 @@ export default function ProjectCard({ project, userId, onDeleted }: ProjectCardP
         </div>
         <div className="flex gap-1">
           {project.url && (
-            <a href={project.url} target="_blank" rel="noopener noreferrer">
+            <a href={/^https?:\/\//i.test(project.url) ? project.url : `https://${project.url}`} target="_blank" rel="noopener noreferrer">
               <Button variant="ghost" size="sm"><ExternalLink size={14} /></Button>
             </a>
           )}
