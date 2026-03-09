@@ -63,7 +63,7 @@ export default function AddProjectForm({ userId, userName, onProjectAdded }: Add
   }
 
   return (
-    <form onSubmit={handleSubmit} className="border border-border bg-bg-secondary p-4 space-y-3">
+    <form onSubmit={handleSubmit} className="w-full border border-border bg-bg-secondary p-4 space-y-3">
       <Input placeholder="Namn" value={name} onChange={(e) => setName(e.target.value)} required autoFocus />
       <Textarea placeholder="Beskrivning (valfritt)" value={description} onChange={(e) => setDescription(e.target.value)} rows={2} />
       <Input placeholder="URL (valfritt)" value={url} onChange={(e) => setUrl(e.target.value)} />

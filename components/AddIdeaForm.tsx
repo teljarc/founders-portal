@@ -70,7 +70,7 @@ export default function AddIdeaForm({ userId, userName, onIdeaAdded }: AddIdeaFo
   }
 
   return (
-    <form onSubmit={handleSubmit} className="border border-border bg-bg-secondary p-4 space-y-3">
+    <form onSubmit={handleSubmit} className="w-full border border-border bg-bg-secondary p-4 space-y-3">
       <Input
         placeholder="Titel"
         value={title}

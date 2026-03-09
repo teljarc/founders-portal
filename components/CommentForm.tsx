@@ -56,7 +56,7 @@ export default function CommentForm({ ideaId, userId, userName, parentId, onComm
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-2 sm:flex-row sm:items-end">
       <Textarea
         placeholder={parentId ? 'Skriv ett svar...' : 'Skriv en kommentar...'}
         value={body}
@@ -64,7 +64,7 @@ export default function CommentForm({ ideaId, userId, userName, parentId, onComm
         rows={2}
         className="flex-1"
       />
-      <Button type="submit" size="sm" disabled={loading || !body.trim()}>
+      <Button type="submit" size="sm" disabled={loading || !body.trim()} className="self-end sm:self-auto">
         {loading ? '...' : 'Skicka'}
       </Button>
     </form>

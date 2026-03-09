@@ -26,7 +26,7 @@ export default function ProjectsPageClient({ projects: initialProjects, userId, 
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-6">
         <h1 className="text-2xl">Projekt</h1>
         <AddProjectForm userId={userId} userName={userName} onProjectAdded={refetch} />
       </div>

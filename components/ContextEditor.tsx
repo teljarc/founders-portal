@@ -132,7 +132,7 @@ export default function ContextEditor({ userName }: ContextEditorProps) {
         placeholder={`Skriv innehåll för ${activeTab.toUpperCase()}.md...`}
       />
 
-      <div className="flex items-center justify-between mt-3">
+      <div className="flex flex-col gap-3 mt-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="text-xs text-text-muted">
           {updatedBy && updatedAt && (
             <span>Senast redigerad av {updatedBy} — {new Date(updatedAt).toLocaleString('sv-SE')}</span>
