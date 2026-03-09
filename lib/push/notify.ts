@@ -1,6 +1,7 @@
 'use server';
 
 import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import webpush from '@/lib/push/vapid';
 
 export async function sendPushNotification(
@@ -45,23 +46,23 @@ export async function notifyOtherFounders(
   ideaTitle: string
 ) {
   const supabase = await createClient();
+  const admin = createAdminClient();
 
-  // Get all founders except current user
-  // We'll query the push_subscriptions table to find other users
-  const { data: otherSubs } = await supabase
-    .from('push_subscriptions')
-    .select('user_id')
-    .neq('user_id', currentUserId);
+  // Get all founders except current user via admin API
+  const { data: { users } } = await admin.auth.admin.listUsers();
+  const otherFounderIds = users
+    .filter(u => u.id !== currentUserId && u.user_metadata?.role === 'founder')
+    .map(u => u.id);
 
-  const uniqueUserIds = [...new Set(otherSubs?.map(s => s.user_id) || [])];
+  if (!otherFounderIds.length) return;
 
   const title = type === 'new_idea' ? 'Ny idé!' : 'Ny kommentar!';
   const body = type === 'new_idea'
     ? `${currentUserName} la till: ${ideaTitle}`
     : `${currentUserName} kommenterade på: ${ideaTitle}`;
 
-  // Create notification records
-  for (const userId of uniqueUserIds) {
+  for (const userId of otherFounderIds) {
+    // Always create in-app notification
     await supabase.from('notifications').insert({
       user_id: userId,
       type,
@@ -69,6 +70,7 @@ export async function notifyOtherFounders(
       triggered_by_name: currentUserName,
     });
 
+    // Send push notification if subscription exists
     await sendPushNotification(userId, title, body, `/dashboard/ideas/${ideaId}`);
   }
 }

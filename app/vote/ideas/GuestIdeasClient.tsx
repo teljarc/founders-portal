@@ -53,7 +53,7 @@ export default function GuestIdeasClient({ ideas, userName }: GuestIdeasClientPr
           ) : (
             ideas.map((idea) => (
               <Link key={idea.id} href={`/vote/ideas/${idea.id}`}>
-                <div className="bg-white border border-slate-200 p-4 rounded-lg hover:shadow-sm transition-shadow cursor-pointer mb-3">
+                <div className="bg-white border border-slate-200 p-4 rounded-lg hover:shadow-sm transition-shadow cursor-pointer">
                   <h3 className="font-serif text-lg text-slate-900 mb-1">{idea.title}</h3>
                   {idea.description && (
                     <p className="text-slate-500 text-sm mb-2 line-clamp-2">{idea.description}</p>
